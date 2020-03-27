@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Pisco1" />
+		<Option execution_dir="C:/jlp_src/Pisco1/codeblock/Pisco1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="C:/EXEC/Pisco1/Pisco1" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/EXEC/Pisco1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="C:/jlp_src/Pisco1" />
+					<Add directory="c:/jlp_src/jlplib/jlp_fits" />
+					<Add directory="c:/jlp_src/jlplib/jlp_numeric" />
+					<Add directory="c:/jlp_src/jlplib/jlp_splot" />
+					<Add directory="C:/jlp_src/jlplib/jlp_wxplot/jlp_wxplot_include" />
+					<Add directory="C:/jlp_src/jlplib/jlp_gseg_wxwid" />
+					<Add directory="C:/jlp_src/jlplib/jlp_gsegraf/jlp_gsegraf_include" />
+					<Add directory="C:/wxWidgets-3.1.1/include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="C:/jlp_src/Pisco1/bitmaps" />
+					<Add directory="C:/jlp_src/Pisco1" />
+					<Add directory="C:/wxWidgets-3.0.2_32bits/include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="C:/EXEC/MyLib/jlp_numeric.a" />
+					<Add library="C:/EXEC/MyLib/jlp_wxplot.a" />
+					<Add library="C:/EXEC/MyLib/jlp_splot.a" />
+					<Add library="C:/EXEC/MyLib/jlp_fits.a" />
+					<Add library="C:/EXEC/MyLib/libcfitsio.a" />
+					<Add library="C:/EXEC/MyLib/libfftw3.a" />
+					<Add library="C:/wxWidgets-3.1.1/build-debug/lib/libwx_baseu-3.1.dll.a" />
+					<Add library="C:/wxWidgets-3.1.1/build-debug/lib/libwx_mswu_core-3.1.dll.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../Pisco1.cpp" />
+		<Unit filename="../Pisco1.h" />
+		<Unit filename="../Pisco1.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="../jlp_celmeca1.cpp" />
+		<Unit filename="../jlp_language_dlg.cpp" />
+		<Unit filename="../jlp_language_dlg.h" />
+		<Unit filename="../jlp_risley.cpp" />
+		<Unit filename="../jlp_rs232_dlg.cpp" />
+		<Unit filename="../jlp_rs232_dlg.h" />
+		<Unit filename="../jlp_rs232_in_c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../jlp_rs232_in_c.h" />
+		<Unit filename="../jlp_time0.cpp" />
+		<Unit filename="../jlp_time0.h" />
+		<Unit filename="../jlp_utime.cpp" />
+		<Unit filename="../psc1_defs.h" />
+		<Unit filename="../psc1_frame.h" />
+		<Unit filename="../psc1_frame_id.h" />
+		<Unit filename="../psc1_frame_logbook.cpp" />
+		<Unit filename="../psc1_frame_menu.cpp" />
+		<Unit filename="../psc1_language.cpp" />
+		<Unit filename="../psc1_language.h" />
+		<Unit filename="../psc1_main.cpp" />
+		<Unit filename="../psc1_param_panel.cpp" />
+		<Unit filename="../psc1_param_panel.h" />
+		<Unit filename="../psc1_pisco_filters.cpp" />
+		<Unit filename="../psc1_pisco_logbook.cpp" />
+		<Unit filename="../psc1_pisco_panel.cpp" />
+		<Unit filename="../psc1_pisco_panel.h" />
+		<Unit filename="../psc1_pisco_panel_onclick.cpp" />
+		<Unit filename="../psc1_pisco_panel_rs232.cpp" />
+		<Unit filename="../psc1_pisco_risley.cpp" />
+		<Unit filename="../psc1_rs232_mutex.cpp" />
+		<Unit filename="../psc1_rs232_mutex.h" />
+		<Unit filename="../psc1_rw_config_files.cpp" />
+		<Unit filename="../psc1_rw_config_files.h" />
+		<Unit filename="../psc1_target_catalogs.cpp" />
+		<Unit filename="../psc1_target_panel.cpp" />
+		<Unit filename="../psc1_target_panel.h" />
+		<Unit filename="../psc1_target_panel_onclick.cpp" />
+		<Unit filename="../psc1_typedef.h" />
+		<Unit filename="../read_WDS_catalog.cpp" />
+		<Unit filename="../read_WDS_catalog.h" />
+		<Unit filename="../tav_utils.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="..\jlp_andor_cam1.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1088" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="..\gdp_frame_video.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1098" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_cam1_acqui.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13281" topLine="359" />
+		</Cursor>
+	</File>
+	<File name="..\gdp_frame_logbook.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1284" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_typedef.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3173" topLine="80" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_cam1_acqui_conti.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3221" topLine="68" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_cam1_set.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7318" topLine="225" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_rw_config_files.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1684" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_display.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5924" topLine="202" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_process.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7465" topLine="235" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_display.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1212" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_photon_corr.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9834" topLine="308" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_menu_rwfits.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3627" topLine="81" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_panel.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1276" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_main_utils.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="752" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_main.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3952" topLine="119" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_panel.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2129" topLine="66" />
+		</Cursor>
+		<Folding>
+			<Collapse line="0" />
+		</Folding>
+	</File>
+	<File name="..\asp2_inv_bispec2.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="27195" topLine="877" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_gdp_frame_menu.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19102" topLine="467" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_panel_onclick.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4537" topLine="81" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_gdp_frame_id.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1957" topLine="70" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_gdp_frame.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1204" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_panel_update.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_fits_utils.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1374" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_utils.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11303" topLine="254" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_display_panel.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2178" topLine="37" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_display_panel.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12990" topLine="425" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_utils.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2465" topLine="52" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_defs.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="948" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_decode_thread.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1705" topLine="35" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_decode_thread.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6571" topLine="195" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_fits0_cvb.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1420" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_covermas.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4690" topLine="107" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_rw_fits0.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2379" topLine="62" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_clean_deconv.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10705" topLine="262" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_rw_fits0.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2622" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_andor_thread_display.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="984" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_speckprocess_panel.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13817" topLine="318" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_andor_thread.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1358" topLine="35" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_speckprocess_panel.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1309" topLine="45" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_andor_thread.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="805" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1349" topLine="35" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_Decode_rw.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11886" topLine="295" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_Decode_process2.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12318" topLine="377" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_3dfits_thread.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1111" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_Decode_process1.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="48166" topLine="1510" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_3Dfits.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7829" topLine="180" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_Decode_access.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9743" topLine="309" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_3Dfits.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1038" topLine="16" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_speckprocess_panel_onclick.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="38290" topLine="1150" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_Decode.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4573" topLine="102" />
+		</Cursor>
+	</File>
+	<File name="..\Atmcd32d.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8266" topLine="153" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_speckprocess_panel_update.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5007" topLine="133" />
+		</Cursor>
+	</File>
+	<File name="..\AndorSpeck2.rc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="621" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_Decode.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4418" topLine="144" />
+		</Cursor>
+	</File>
+	<File name="..\AndorSpeck2.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="270" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\jlp_andor_cam1.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7103" topLine="212" />
+		</Cursor>
+	</File>
+	<File name="..\asp2_3dfits_thread.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1081" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="..\AndorSpeck2.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1129" topLine="30" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>
