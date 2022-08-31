@@ -1,0 +1,74 @@
+AS Lampa di calib.
+1: Alogena
+2: Filamento
+3: Argon
+4: Mercurio
+5: Neon
+6: Xenon
+EN Ruota d'ingresso
+1: Vuoto
+2: Vuoto
+3: Rischio di occult.
+4: Specchio di calibr.
+5: Rischio di occult.
+6: Vuoto
+CH Ruota di campo
+1: Fenditura
+2: Foro di calibr.
+3: Mira di calibr.
+4: Coronografo
+5: Reticolo
+6: Lente di campo
+MA Ruota a maschere
+1: Maschera 3
+2: Foro di 7 mm
+3: Maschera 2
+4: Maschera 1
+5: Vuoto
+6: Microlenti
+DA Ruota filtri N.D.
+1: Filtro UV
+2: Densità 1
+3: Densità 2
+4: Densità 3
+5: Densità 4
+6: Vuoto
+DB Ruota filtri N.D.
+1: Vuoto
+2: Densità 0.2
+3: Densità 0.4
+4: Densità 0.6
+5: Densità 0.8
+6: Vuoto
+FA Ruota con filtri
+1: Vuoto
+2: Grism
+3: Vuoto
+4: OIII 500/10
+FB Ruota con filtri
+1: V 550/70
+2: B 450/70
+3: R 650/70
+4: RL 750/70
+5: IR 850/70
+6: Luce bianca
+GR Ruota oculari
+1: Pupilla
+2: Spectro.
+3: 32 mm
+4: 50 mm
+5: 20 mm
+6: 10 mm
+## Filtri:
+#FA 4 501.00 11.   OIII
+#FB 1 530.00 57.   V 550/70
+#FB 2 447.00 47.   B 450/70
+#FB 3 644.00 70.   R 650/70
+#FB 4 743.00 69.   RL 750/70
+#FB 5 855.00 74.   IR 850/70
+#FB 6 650.00 200.  White light
+###FB 9 656.30 1.0   Halpha
+###FB 9 644.00 1.1   Cont Halpha
+###FB 9 671.70 0.9   SII
+######## VERSION 18-09-2006 ######### 
+

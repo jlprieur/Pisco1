@@ -47,12 +47,9 @@ public:
     };
 
 // In psc1_target_catalogs.cpp
-  bool CatalogIsWDS();
-  int FindObjectInPiscoCatalog(wxString& err_messg);
   int FindObjectInWdsCatalog(wxString& err_messg);
-  void OnOpenCatalog1(wxCommandEvent& event);
-  void OnOpenADSWDSCrossRefCatalog(wxCommandEvent& event);
-  void OnFindObjectInCatalog1(wxCommandEvent& event);
+  void OnOpenWdsCatalog(wxCommandEvent& event);
+  void OnFindObjectInWdsCatalog(wxCommandEvent& event);
 
 // psc1_target_panel_onclick.cpp
   void ValidateChanges();
@@ -68,8 +65,9 @@ protected:
   void OnValidate(wxCommandEvent& event);
   void OnCancel(wxCommandEvent& event);
   void OnNext(wxCommandEvent& event);
+  void FindNextObjectInWdsCatalog();
   void OnPrevious(wxCommandEvent& event);
-  void OnSelect(wxCommandEvent& event);
+  void OnSelectTarget(wxCommandEvent& event);
   void OnChangeText(wxCommandEvent& event);
   void OnSelectTargetType(wxCommandEvent& event);
   void OnSelectLimits(wxCommandEvent& event);
@@ -82,18 +80,19 @@ private:
 // Messages in different languages:
   wxString *m_messg;
 
-  int initialized, target_type, catalog_type, ntargets_found;
+  int initialized, target_type, ntargets_found;
   bool ChangesDone1, ValidatedChanges1;
   double alpha_value, delta_value, equin_value;
-  wxString target_name, catalog1_fname, ADS_WDS_cross_fname;
+  wxString target_name, WdsCatalog_fname;
   Binary_Parameters bpa1, bpa_found[NMAX_TARGETS];
   Binary_Profile bpr1;
 
   wxTextCtrl *PscCtrl_StarName, *PscCtrl_Alpha, *PscCtrl_Delta, *PscCtrl_Equinox;
   wxStaticText *PscStatic_Date_LastObs, *PscStatic_Rho_LastObs, *PscStatic_Theta_LastObs;
-  wxStaticText *PscStatic_TargetName, *PscStatic_Catalog1, *PscStatic_ADSWDS_crossref;
+  wxStaticText *PscStatic_TargetName, *PscStatic_WdsCatalog;
   wxStaticText *PscStatic_SelectionWDSName, *PscStatic_SelectionStarName;
-  wxStaticText *PscStatic_SelectionEpoch, *PscStatic_SelectionADSName;
+  wxStaticText *PscStatic_SelectionWDS2Name, *PscStatic_SelectionSpecType;
+  wxStaticText *PscStatic_SelectionEpoch;
   wxStaticText *PscStatic_SelectionRhoTheta, *PscStatic_SelectionMagDmag;
   JLP_ComboBox PscCmb_TargetType;
   JLP_ComboBox PscCmb_Alpha0, PscCmb_AlphaRange, PscCmb_DeltaMin, PscCmb_DeltaMax;

@@ -164,7 +164,8 @@ if(initialized != 1234) return;
  (%d bauds, 8 bits, no parity, 1 stop-bit)"),
                     comport_nber1 + 1, baudrate1);
     wxMessageBox(buffer, wxT("JLP_RS232_Dlg"), wxOK | wxICON_ERROR);
-    return;
+// In Linux version, do not exit here:
+//    return;
     }
 
 // Close dialog and return status = 0:

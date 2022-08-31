@@ -1,0 +1,566 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% File menu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=0 
+File
+Fichier
+File
+Fichero
+% i=4
+Save
+Sauvegarde
+Salvare
+Guardar
+% i=5
+Save to file
+Sauvegarde dans un fichier
+Salvare
+Guardare en un archivo
+% i=9
+Exit
+Sortie
+Uscita
+Salida
+% i=10
+Quit program
+Sortie du programme
+Chiudere il programma
+Cierra el programa
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Logbook menu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=50
+Show logbook window
+Montre le carnet de bord
+Mostra il diario di bordo
+Muestra el libro de registro
+% i=51
+Display the logbook window
+Affiche la fen&ecirc;tre du carnet de bord
+Mostra la finestra del diario di bordo
+Muestra la ventana con el libro de registro
+% i=52
+Hide logbook window
+Cache le carnet de bord
+Nasconde il diario di bordo
+Oculta el libro de registro
+% i=53
+Hide the logbook window
+Cache la fen&ecirc;tre du carnet de bord
+Oculta la finestra col diario di bordo
+Oculta la ventana con el libro de registro
+% i=54
+Add comments
+Ajout de commentaires
+Aggiunge commenti
+A&ntilde;ade comentarios
+% i=55
+Add comments to the logbook
+Ajoute des commentaires au carnet de bord
+Aggiunge commenti al diario di bordo
+A&ntilte;ade comentarios al libro de registro
+% i=56
+Save the logbook
+Sauve le carnet de bord
+Salva il diario di bordo
+Guarda el libro de registro
+% i=57
+Save a selection from the logbook content
+Sauve une s&eacute;lection du carnet de bord
+Salva la selezione del diario di bordo
+Guarda la seleci&oacute;n del libro de registro
+% i=58
+Logbook
+Carnet de bord
+Diario di bordo
+Libro de registro
+% i=59
+Enter your comments
+Entrez vos commentaires
+Entra i sui commenti
+Escribe sus comentarios
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  Help menu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=90
+Help
+Aide
+Aiuto
+Ayuda
+% i=91
+How to use this program
+Aide pour utiliser ce programme
+Aiutare con questo programma
+Ayuda para utilizar este programe
+% i=92
+Context help...
+Aide du contexte
+Aiuto del contesto
+Ayuda del contexto
+% i=93
+Get context help for a widget/control
+Affiche une aide du contexte d'un bouton/&eacute;l&eacute;ment
+% i=94
+About...
+A propos...
+Su...
+A prop&oacute;sito...
+% i=95
+About this program...
+A propos de ce programme...
+Su questo programma...
+Acerca de este programe...
+% i=96
+Help
+Aide
+Aiuto
+Ayuda
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Help/About    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i=97
+Sorry: 'Help' is not implemented yet
+D&eacute;sol&eacute;: 'Aide' non encore disponible
+Mi dispiace: 'Aiuto' non ancora implementato
+Lo siento: 'Ayuda' aun no implementada 
+% i=98
+Current version: January 2016
+Version actuelle: janvier 2015 
+Versione corrente: gennaio 2016 
+Versi&oacute;n actual: enero 2016
+% i=99
+Created with wxWidgets
+Cr&eacute;&eacute; avec wxWidgets
+Creato con wxWidgets
+Creado con wxWidgets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Panels
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=100
+Parameters
+Param&egrave;tres
+Parametri
+Parametros
+% i=101
+Target
+Objet
+Oggetto
+Objeto
+% i=102
+Control board
+Tableau de bord
+Panello di controllo
+Tablero de control
+% i=150
+RS232 link
+Liaison RS232
+Collegamento RS232
+Enlace RS232
+% i=151
+Settings
+Param&egrave;tres
+Parametri
+Parametros
+% i=152
+COM Port
+Port COM
+Porta COM
+Puerto COM
+% i=153
+Speed (baudrate)
+Vitesse (baudrate)
+Velocita (baudrate)
+Velocidad (baudrate)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Parameters Panel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=180
+Atmosphere
+Atmosph&egrave;re
+Atmosfera
+Atmosfera
+% i=181
+Pressure (mbar)
+Pression (mbar)
+Pressione (mbar)
+Pressi&oacute;n (mbar)
+% i=182
+Temperature (deg C)
+Temp&eacute;rature (deg C) 
+Temperatura (gradi C)
+Temperatura (grados C)
+% i=183
+Hygrometry (percent.)
+Hygrom&eacute;trie (pourcent.)
+Igrometria (percent.)
+Higrometr&iacute;a (porcent.)
+% i=190
+Universal Time
+Temps Universel
+Tempo Universale
+Tiempo Universal
+% i=191
+U.T. shift (h)
+D&eacute;calage T.U. (h)
+Spostamento T.U. (o)
+Cambio T.U. (h)
+% i=192
+Validate
+Valider
+Convalidare
+Validar
+% i=193
+Cancel 
+Annuler 
+Cancellare
+Annulare
+% i=194
+Risley prisms
+Prismes de Risley
+Prismi de Risley
+Prismos de Risley
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Pisco Panel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=200
+Wheel positions
+Positions des roues
+Posizione delle ruote
+Posiciones de las ruedas
+% i=201
+Check the positions
+V&eacute;rifier les positions
+Controllare le posizioni
+Comprobar las posiciones
+% i=202
+Lamp off
+Lampe &eacute;teinte
+Lampada spenta
+L&aacute;mpara apagada
+% i=203
+Lamp on
+Lampe allum&eacute;e
+Lampada accesa
+L&aacute;mpara encendida
+% i=204
+Risley prisms
+Prismes de Risley
+Prismi di Risley
+Prismas de Risley
+% i=205
+Validate
+Valider
+Convalidare
+Validar
+% i=206
+Manual correction
+Correction manuelle
+Correzione manuale
+Correcci&oacute;n manual
+% i=207
+Automatic correction
+Correction automatique
+Correzione automatica
+Correcci&oacute;n autom&aacute;tica
+% i=208
+Start a new exposure
+Lancer une nouvelle pose
+Lanciare una nuova esposizione
+Iniciar una nueva exposici&oacute;n
+% i=209
+Stop current exposure
+Arr&ecirc;ter la pose
+Fermare l'esposizione
+Parar la exposici&oacute;n
+% i=210
+Serial link
+Liaison s&eacute;rie
+Collegamento seriale
+Enlace serie
+% i=211
+Message:
+Message:
+Messaggio:
+Mensaje:
+% i=212
+Send 
+Envoyer
+Inviare
+Enviar
+% i=213
+Error: bad syntax
+Erreur: mauvaise syntaxe
+Errore: cattiva sintassi
+Error: mala sintaxis
+% i=214
+Error: bad value
+Erreur: mauvaise valeur
+Errore: valore cattivo
+Error: mal de precio
+% i=215
+Send (without CR)
+Envoyer (sans RC)
+Inviare (senza 'return') 
+Enviar (sin CR)
+% i=220
+Exposure parameters
+Param&egrave;tres de la pose
+Parametri dell'esposizione
+Parametros de la exposici&oacute;n
+% i=221
+Name:
+Nom:
+Nome:
+Nombre:
+% i=222
+Declination:
+D&eacute;clinaison:
+Declinazione:
+Declinaci&oacute;n:
+% i=223
+Right ascension:
+Ascension droite:
+Ascenzione retta:
+Ascensi&oacute;n recta:
+% i=224
+Elevation (degrees):
+Hauteur (degr&eacute;s):
+Altezza (gradi):
+Altura (grados):
+% i=225
+Air mass:
+Masse d'air:
+Massa d'aria:
+Masa de aire:
+% i=226
+Hour angle:
+Angle horaire:
+Angolo orario:
+Angulo horario:
+% i=227
+Sidereal time:
+Temps sid&eacute;ral:
+Tempo siderale:
+Tiempo sideral:
+% i=228
+Universal Time:
+Temps Universel:
+Tempo Universale:
+Tiempo Universal:
+% i=229
+Duration :
+Dur&eacute;e :
+Durata :
+Duraci&oacute;n :
+% i=230
+The target is under the horizon
+L'objet est sous l'horizon
+L'oggetto &egrave; sotto l'orizzonte
+El objeto est&aacute; debajo del horizonte
+% i=231
+Undefined
+Non d&eacute;fini
+Non definito
+Indefinido
+% i=232
+Equinox
+Equinoxe
+Equinozio
+Equinoccio
+% i=233
+Error in
+Erreur dans
+Errore in
+Error en
+% i=234
+Object under the horizon: no correction!
+Objet sous l'horizon: aucune correction!
+Oggetto sotto l'orizzonte: nessuna correzione!
+Objeto debajo del horizonte: ninguna correcci&oacute;n
+% i=235
+Error opening file
+Erreur lors de l'ouverture du fichier
+Errore aprendo il file
+Error aprendo il file
+Error al abrir el archivo
+% i=236
+No filter, therefore no correction!
+Pas de filtre, donc pas de correction!
+Nessuno filtro, dunque nessuna correzione!
+Ninguno filtro, entonces ninguna correcci&oacute;n!
+% i=240
+Wheel not connected
+Roue non connect&eacute;e
+Ruota non collegata
+Rueda no conectada
+% i=260
+The microprocessor is offline.  
+Le microprocesseur ne r&eacute;pond pas.  
+Il microprocessore non risponde.
+El microprocesor no contesta.
+% i=261
+Do you want to exit from this program?
+Voulez-vous sortir du programme?
+Volete uscire dal programma ?
+Quiere salir del programa ?
+% i=262
+RS232 failure
+RS232: echec
+RS232: insuccesso
+RS232: fracaso
+% i=263
+PISCO is starting up ('boot')...
+D&eacute;marrage ('boot') de PISCO en cours...
+Avvio ('boot') di PISCO in corso...
+Puesta en marcha ('boot') de PISCO en curso...
+% i=264
+Enter 'OK' when the Risley prisms have finished rotating.
+Entrez 'OK' quand les prismes de Risley ont fini de tourner.
+Inserire 'OK' quando i prismi di Risley hanno finito di girare.
+Entra 'OK' cuando los prismos de Risley han terminado de girar.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Target
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=300
+Target type
+Type d'objet
+Tipo di oggetto
+Tipo de objetivo
+% i=301
+Type:
+Type:
+Tipo:
+Tipo:
+% i=302
+Name:
+Nom:
+Nome:
+Nombre:
+% i=303
+Astronomical object
+Objet astronomique
+Oggetto astronomico
+Objeto astron&oacute;mico
+% i=304
+Empty field for target name
+Champ vide pour le nom de l'objet
+Campo vuoto per il nome dell'oggetto
+Campo vac&iacute;o para el nombre del obgeto
+% i=305
+Error opening the catalog:
+Erreur en ouvrant le catalogue:
+Errore aprendo il catalogo:
+Error al abrir el cat&aacute;logo:
+% i=306
+ This object is not in the catalog
+ Cet objet n'est pas dans le catalogue
+ Quest'oggetto non &egrave; nel catalogo
+ Este obgeto no est&aacute; en el cat&aacute;logo
+% i=307
+Error reading coordinates
+Erreur en lisant les coordonn&eacute;es
+Errore leggendo le coordinate
+Error leendo las coordenadas
+% i=308
+Open/WDS-Pisco catalog
+Ouvrir/catalogue WDS-Pisco
+Aprire/catalogo WDS-Pisco
+Abrir/cat&aacute;logo WDS-Pisco
+% i=309
+Find this name
+Chercher ce nom
+Cerca questo nomme
+Busca este nombre
+% i=310
+Automatic search
+Recherche automatique
+Ricerca automatica
+% i=311
+Alpha min.
+Alpha min.
+Alfa min.
+% i=312
+Alpha range :
+Amplitude en alpha:
+Ampiezza in alfa:
+Amplituda in alfa :
+% i=313
+Object found
+Objet trouv&eacute; 
+Oggetto trovato
+Objeto encontrado
+% i=314
+Epoch of last obs. :
+Epoque dern. obs. :
+Epoca ultim. oss. :
+Epoca &uacute;ltim. obs. :
+% i=320
+Find the next
+Cherche le suivant
+Cerca il prossimo
+Busca el pr&oacute;ximo
+% i=321
+Display the previous
+Affiche le pr&eacute;c&eacute;dent
+Mostra il precedente
+Muestra el precedente
+% i=322
+Open/ADS-WDS cross-ref
+Ouvrir/r&eacute;f. crois&eacute;e ADS-WDS
+Aprire/ref. incrociata ADS-WDS
+Abrir/ref. cruzada ADS-WDS
+% i=323
+Select this object
+S&eacute;lectionne cet objet
+Seleziona questo oggetto
+Selecciona este objeto
+% i=324
+Save the entire selection 
+Sauve la s&eacute;lection compl&egrave;te
+Salva la selezione completa
+Salva la selecci&oacute;n completa
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Logbook
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i=400
+End
+Fin
+Fine
+Fin
+% i=401
+U.T.
+T.U.
+T.U.
+T.U.
+% i=402
+Exposure time
+Temps de pose
+Tempo di esposizione
+Tiempo de exposici&oacute;n
+% i=403
+NEW EXPOSURE
+NOUVELLE POSE
+NUOVA ESPOSIZIONE
+NUOVA EXPOSICION
+% i=404
+Object
+Objet
+Oggetto
+Objeto
+% i=405
+Start
+D&eacute;but
+Inizio
+Inicio
+% i=406
+on
+le
+il
+el
+% i=407
+Wheels
+Roues
+Ruote
+Ruedas
+% i=408
+Filter
+Filtre
+Filtro
+Filtro
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

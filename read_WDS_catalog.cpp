@@ -44,7 +44,7 @@ static int read_WDS_precise_coordinates(char *cat_line0, double *alpha0,
                                         double *delta0, char *err_message);
 
 /*************************************************************************
-* Format of WDS catalog (version of 2009-2012):
+* Format of WDS catalog (version of 2009-2022):
 *
   COLUMN     Format                     DATA
   --------   ------         ----------------------------
@@ -130,13 +130,13 @@ while(!feof(fp_WDS_cat)) {
    if(comp_name0[0] == '\0') strcpy(comp_name0, "AB");
 
 /* DEBUG
+*/
 { wxString buff;
 buff.Printf(wxT("iline=%d name=%s (%s) comp=%s (%s)"), iline,
             discov_name1, discov_name0, comp_name1, comp_name0);
 wxMessageBox(buff, wxT("ZZZFIND"), wxOK);
 if(iline >= 8)return(-1);
 }
-*/
 
 // Check first if discoverer is the same:
    if(!strcmp(discov_name1, discov_name0)) {
@@ -209,13 +209,15 @@ int search_in_WDS_catalog(char *WDS_catalog, Binary_Profile bpr1,
 {
 FILE *fp_WDS_cat, *fp_save;
 char cat_line0[256], discov_name0[20], comp_name0[20], WDS_name0[20];
-char cvalue[64], buff1[256];
+char WDS2_name0[20], SpecType_name0[20], cvalue[64], buff1[256];
 int iline, ivalue;
 double alpha0, alpha_min, alpha_max, delta0, delta_min, delta_max;
 double dvalue;
 int status;
 
 bpa1->WDS_name = wxT("");
+bpa1->WDS2_name = wxT("");
+bpa1->Spectral_type = wxT("");
 bpa1->Companion_name = wxT("");
 bpa1->Discover_name = wxT("");
 bpa1->epoch = 0.;
@@ -264,11 +266,20 @@ Columns   1- 10:    The  hours, minutes, and tenths of minutes of Right
 hhmmn+ddmm
 12345+1234
 */
+// WDS name:
    strncpy(WDS_name0, &cat_line0[0], 10);
    WDS_name0[10] = '\0';
-
-// WDS name:
    bpa1->WDS_name = wxString(WDS_name0);
+
+// WDS2 name:
+   strncpy(WDS2_name0, &cat_line0[112], 18);
+   WDS2_name0[18] = '\0';
+   bpa1->WDS2_name = wxString(WDS2_name0);
+
+// Spectral_type:
+   strncpy(SpecType_name0, &cat_line0[70], 8);
+   SpecType_name0[8] = '\0';
+   bpa1->Spectral_type = wxString(SpecType_name0);
 
    status = WDS_name_to_coordinates(WDS_name0, &alpha0, &delta0, err_message);
 // Save coordinates (temporarily, since they may be improved later...)
@@ -341,7 +352,7 @@ rho=%.1f rho_min=%.1f rho_max=%.1f mag=%.1f mag_min=%.1f mag_max=%.1f"),
      strncpy(cvalue, &cat_line0[58], 5);
      cvalue[5] = '\0';
      if(sscanf(cvalue, "%lf", &dvalue) == 1) bpa1->mag = (double)dvalue;
-       else wxMessageBox(wxString(cvalue), wxT("WDS catalog/Error reading magnitude"), wxOK);
+//       else wxMessageBox(wxString(cvalue), wxT("WDS catalog/Error reading magnitude"), wxOK);
      strncpy(cvalue, &cat_line0[64], 5);
      cvalue[5] = '\0';
      if(sscanf(cvalue, "%lf", &dvalue) == 1) bpa1->dmag = (double)dvalue - bpa1->mag;
@@ -352,7 +363,7 @@ rho=%.1f rho_min=%.1f rho_max=%.1f mag=%.1f mag_min=%.1f mag_max=%.1f"),
 
        status = read_WDS_precise_coordinates(cat_line0, &alpha0, &delta0,
                                              buff1);
-       if(status) {
+       if(status != 0) {
        sprintf(err_message, " %s of WDS%s in line%d\n",
                buff1, WDS_name0, iline);
        } else {
@@ -397,18 +408,22 @@ Columns   1- 10:    The  hours, minutes, and tenths of minutes of Right
 static int WDS_name_to_coordinates(char *WDS_name0, double *alpha0,
                                    double *delta0, char *err_message)
 {
-char sign[1];
+char sign = ' ';
 int status = -1, hh, htm, dd, dm;
 
- if(sscanf(WDS_name0, "%02d%03d%c%02d%02d", &hh, &htm, sign, &dd, &dm) == 5) {
+ if(sscanf(WDS_name0, "%02d%03d%c%02d%02d", &hh, &htm, &sign, &dd, &dm) == 5) {
     *alpha0 = (double)hh + ((double)htm)/600.;
     *delta0 = (double)dd + ((double)dm)/60.;
-    if(sign[0] == '-') *delta0 *= -1.;
-    status = 0;
+    if(sign == '-') {
+     *delta0 *= -1.;
+      status = 0;
+    } else if(sign == '+') {
+      status = 0;
     } else {
-      sprintf(err_message,"read_WDS_precise_coordinates/Error reading >%s<",
+      sprintf(err_message,"WDS_name_to_coordinates/Error reading >%s<",
               WDS_name0);
     }
+ }
 
 return(status);
 }
@@ -442,9 +457,11 @@ Columns 113-130:    The hours, minutes, seconds and tenths of seconds (when
 static int read_WDS_precise_coordinates(char *cat_line0, double *alpha0,
                                         double *delta0, char *err_message)
 {
-char cvalue[64], sign[1];
-int status = -1, hh, hm, hs, hss, dd, dm, ds, dss;
+char cvalue[64], sign = ' ';
+int status = -1, hh, hm, dd, dm;
+double hss, dss;
 
+ strcpy(err_message, "");
 /*
   113 - 130   A18            2000 precise coordinates
 Example:
@@ -452,112 +469,23 @@ Example:
 */
  strncpy(cvalue, &cat_line0[112], 18);
  cvalue[18] = '\0';
- if(sscanf(cvalue, "%02d%02d%02d.%02d%c%02d%02d%02d.%d",
-    &hh, &hm, &hs, &hss, sign, &dd, &dm, &ds, &dss) == 9) {
-    *alpha0 = (double)hh + ((double)hm)/60.
-              + ((double)hs + (double)hss/10.)/3600.;
-    *delta0 = (double)dd + ((double)dm)/60.
-              + ((double)ds + (double)dss/10.)/3600.;
-    if(sign[0] == '-') *delta0 *= -1.;
+ if(sscanf(cvalue, "%02d%02d%lf%c%02d%02d%lf",
+    &hh, &hm, &hss, &sign, &dd, &dm, &dss) == 7) {
+    *alpha0 = (double)hh + ((double)hm)/60. + hss/3600.;
+    *delta0 = (double)dd + ((double)dm)/60. + dss/3600.;
+    if(sign == '-') {
+    *delta0 *= -1.;
     status = 0;
-    } else {
-      sprintf(err_message,"read_WDS_precise_coordinates/Error reading >%s<",
-              cvalue);
+    }
+    else if(sign == '+') {
+    status = 0;
+    } 
+  }
+
+  if(status != 0) {
+     sprintf(err_message,"read_WDS_precise_coordinates/Error reading >%s<",
+             cvalue);
     }
 
 return(status);
-}
-/************************************************************************
-* Conversion of WDS name to ADS (if possible)
-*
-* INPUT:
-* WDS_name1, Discov_name1: WDS name
-* ADS_WDS_cross: name of the ADS/WDS cross-reference file
-*
-* OUTPUT:
-* ADS_name1: ADS name
-**************************************************************************/
-int  WDS_to_ADS_name(char *WDS_name2, char *Discov_name2, char *ADS_name2,
-                     char *ADS_WDS_cross, int *found, char *err_message)
-{
-char in_line[80], ADS_name0[20], WDS_name0[20], discov_name0[20];
-char WDS_name1[20], Discov_name1[20];
-int iline, status = -1;
-FILE *fp_ADS_WDS_cross;
-register int i;
-
-strcpy(Discov_name1, Discov_name2);
-jlp_compact_string(Discov_name1, 20);
-strcpy(WDS_name1, WDS_name2);
-jlp_compact_string(WDS_name1, 20);
-
-strcpy(ADS_name2, "");
-*found = 0;
-
-/* Open input file containing the ADS_WDS cross-references */
-if((fp_ADS_WDS_cross = fopen(ADS_WDS_cross, "r")) == NULL) {
-   sprintf(err_message, "WDS_to_ADS_name/Error opening ADS-WDS cross-ref.: %s\n",
-           ADS_WDS_cross);
-   return(-1);
-  }
-
-
-/* Scan the cross-reference file: */
-/* Syntax:
-BDS         ADS     Discovr Comp         WDS       Omit?
-
-13663     17158     A  1248           00000+7530
-12704         1     STF3053  AB       00026+6606
-13664     17180     BGH   1  AB-C     00024+1047
-
-ADS numbers in fields 11 to 15
-Discov names in fields 21 to 27
-Components in fields 30 to 36
-WDS numbers in fields 39 to 48
-(NB: C arrays start at 0, hence should remove one from field numbers)
-*/
-iline = 0;
-while(!feof(fp_ADS_WDS_cross)) {
-  if(fgets(in_line, 120, fp_ADS_WDS_cross)) {
-    iline++;
-    if(in_line[0] != '%') {
-
-// ADS name:
-      for(i = 0; i < 6; i++) ADS_name0[i] = in_line[10+i];
-      ADS_name0[6] = '\0';
-      jlp_trim_string(ADS_name0, 20);
-
-// Discoverer:
-      for(i = 0; i < 7; i++) discov_name0[i] = in_line[20+i];
-      discov_name0[7] = '\0';
-      jlp_compact_string(discov_name0, 20);
-
-// WDS name:
-      for(i = 0; i < 10; i++) WDS_name0[i] = in_line[38+i];
-      WDS_name0[10] = '\0';
-
-// DEBUG:
-/*
-{
-  wxString buff;
-  buff.Printf(wxT("ADS=%s WDS=%s (%s) Disc=%s (%s)"),
-              ADS_name0, WDS_name1, WDS_name0,
-              Discov_name1, discov_name0);
-  if(iline > 7 && iline < 11) wxMessageBox(buff, wxT("ZZZ"), wxOK);
-}
-*/
-// Break from loop when found:
-      if(!strcmp(WDS_name1, WDS_name0)
-         && !strcmp(Discov_name1, discov_name0)) {
-        strcpy(ADS_name2, ADS_name0);
-        *found = 1;
-        break;
-        }
-      } /* EOF inline[0] == '%" */
-    } /* EOF fgets */
-} /* EOF while */
-
-/* Close cross-reference file */
-fclose(fp_ADS_WDS_cross);
-return(0);
 }

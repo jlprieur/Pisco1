@@ -399,7 +399,7 @@ wxFlexGridSizer *fgs1;
  hgap = 10;
  fgs1 = new wxFlexGridSizer(irows, icols, vgap, hgap);
 // i=221 "Name"
- PscStatic_object_name = new wxStaticText(this, wxID_ANY, wxT("ADS 12377"),
+ PscStatic_object_name = new wxStaticText(this, wxID_ANY, wxT("SKF1140"),
 // Should be large enough to be able to display ADC messages ... :
                                           wxDefaultPosition, wxSize(250,28));
  fgs1->Add(new wxStaticText(this, wxID_ANY, m_messg[221]));

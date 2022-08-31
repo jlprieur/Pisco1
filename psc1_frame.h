@@ -69,6 +69,7 @@ public:
     void PiscoPanelSetup();
     void OnPageChanging(wxBookCtrlEvent &event);
     int SelectLanguageSetup();
+    void CDisplayClockOnStatusBar();
 
 #if wxUSE_TOOLTIPS
     void OnToggleTooltips(wxCommandEvent& event);
@@ -99,9 +100,29 @@ public:
 
 protected:
 
+// Clock on StatusBar:
+    void CDisplay_OnUpdateClock(wxTimerEvent&) {
+        CDisplay_UpdateClock();
+    }
+
+    void CDisplay_UpdateClock() {
+      wxDateTime wxdt;
+      wxString wxbuff;
+      if(initialized == 1234) {
+        UT_shift = psc1_param_panel->GetUTShift();
+        wxdt = wxDateTime::Now().Subtract(wxTimeSpan(-UT_shift));
+        wxbuff = wxT("UT ") + wxdt.FormatTime();
+        SetText_to_StatusBar(wxbuff, 2);
+        }
+    }
+
 private:
   wxStatusBar *m_StatusBar;
   int initialized;
+
+// Clock on Menubar:
+  wxTimer m_clockTimer;
+  int UT_shift;
 
 // Messages in 5 languages:
   int iLang;

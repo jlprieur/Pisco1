@@ -182,7 +182,7 @@ gets(buffer); sscanf(buffer,"%lf,%lf",&beta1,&beta2);
 
 /* Deriving cross_angle between prisms
    and computing residuals at lambda_cent */
-italk = 1;
+italk = 0;
 status = GET_CROSSANGLE(lambda_cent,dlambda,&cross_angle,&resid_disp,
                &beta0,tt,ff,pp,zd, ra_offset, rb_offset, ra_sign, rb_sign,
                &icode1,&icode2,fp1,&italk);

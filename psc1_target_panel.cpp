@@ -70,10 +70,8 @@ target_type = 0;
 
 ntargets_found = 0;
 
-// Catalog:
-catalog1_fname = wxT("");
-catalog_type = 0;
-ADS_WDS_cross_fname = wxT("");
+// WDS catalog:
+WdsCatalog_fname = wxT("");
 
 // Selection parameters:
 bpr1.alpha_range = 1.;
@@ -88,14 +86,14 @@ bpr1.rho_max = 2.0;
 // Selected object:
 bpa1.Star_name = wxT("");
 bpa1.WDS_name = wxT("");
-bpa1.ADS_name = wxT("");
+bpa1.WDS2_name = wxT("");
+bpa1.Spectral_type = wxT("");
 bpa1.Discover_name = wxT("");
 bpa1.Companion_name = wxT("");
 bpa1.alpha = 0.;
 bpa1.delta = 0.;
 bpa1.dmag = 0.;
 bpa1.epoch = 2000.;
-bpa1.has_orbit = false;
 bpa1.mag = 0.;
 bpa1.rho = 0.;
 bpa1.theta = 0.;
@@ -138,8 +136,8 @@ void Psc1_TargetPanel::TargetPanel_LeftSetup(wxBoxSizer *target_left_sizer)
 wxStaticBoxSizer *type_sizer, *limits_sizer, *found_sizer;
 wxFlexGridSizer *fgs1, *fgs2, *fgs3;
 wxBoxSizer *w_hsizer1, *w_hsizer2;
-wxButton *button_open_cat1, *button_next, *button_prev;
-wxButton *button_open_wds_ads, *button_select, *button_find_all;
+wxButton *button_next, *button_prev;
+wxButton *button_open_wds, *button_select, *button_find_all;
 int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
 
 // *************** Target-type: ***************************************
@@ -179,23 +177,15 @@ int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
 
  w_hsizer1 = new wxBoxSizer( wxHORIZONTAL );
 
-// i=308 "Open catalog"
- button_open_cat1 = new wxButton(this, ID_TARGET_OPENCAT1, m_messg[308]);
- w_hsizer1->Add(button_open_cat1);
+// i=308 "Open WDS catalog"
+ button_open_wds = new wxButton(this, ID_TARGET_OPEN_WDS, m_messg[308]);
+ w_hsizer1->Add(button_open_wds);
 
-// Catalog filename:
- PscStatic_Catalog1 = new wxStaticText(this, wxID_ANY, wxT(""),
+// WDS catalog filename:
+ PscStatic_WdsCatalog = new wxStaticText(this, wxID_ANY, wxT(""),
                                        wxPoint(-1,-1), wxSize(wwidth, 28));
- w_hsizer1->Add(PscStatic_Catalog1, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 20);
+ w_hsizer1->Add(PscStatic_WdsCatalog, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 20);
 
-// i=322 "Open/ADS-WDS cross-ref"
- button_open_wds_ads = new wxButton(this, ID_TARGET_OPEN_ADSWDS, m_messg[322]);
- w_hsizer1->Add(button_open_wds_ads);
-
-// Catalog filename:
- PscStatic_ADSWDS_crossref = new wxStaticText(this, wxID_ANY, wxT(""),
-                                       wxPoint(-1,-1), wxSize(wwidth, 28));
- w_hsizer1->Add(PscStatic_ADSWDS_crossref, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 20);
 
  target_left_sizer->Add(w_hsizer1, 0, wxALL, 30);
 
@@ -314,8 +304,8 @@ int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
 // i=313 "Object found"
  found_sizer = new wxStaticBoxSizer(wxVERTICAL, this, m_messg[313]);
  irows = 4;
- icols = 6;
- vgap = 10, hgap = 16, wwidth = 140;
+ icols = 8;
+ vgap = 10, hgap = 8, wwidth = 160;
  fgs3 = new wxFlexGridSizer(irows, icols, vgap, hgap);
 
 // i=302 "Name:"
@@ -332,12 +322,12 @@ int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
                                wxPoint(-1,-1), wxSize(wwidth, 28));
  fgs3->Add(PscStatic_SelectionWDSName);
 
-// ADS
- fgs3->Add(new wxStaticText(this, -1, wxT("ADS :")));
-// Selection ADS name:
- PscStatic_SelectionADSName = new wxStaticText(this, -1, wxT(""),
+// WDS2
+ fgs3->Add(new wxStaticText(this, -1, wxT("WDS2 :")));
+// Selection WDS2 name:
+ PscStatic_SelectionWDS2Name = new wxStaticText(this, -1, wxT(""),
                                wxPoint(-1,-1), wxSize(wwidth, 28));
- fgs3->Add(PscStatic_SelectionADSName);
+ fgs3->Add(PscStatic_SelectionWDS2Name);
 
 // "Mag, Delta mag:"
  fgs3->Add(new wxStaticText(this, -1, wxT("m_V :")));
@@ -360,6 +350,13 @@ int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
                                wxPoint(-1,-1), wxSize(wwidth, 28));
  fgs3->Add(PscStatic_SelectionEpoch);
  found_sizer->Add(fgs3, 0, wxALL, 10);
+
+// "SpecType:"
+ fgs3->Add(new wxStaticText(this, -1, wxT("SpecType :")));
+// SpecType:
+ PscStatic_SelectionSpecType = new wxStaticText(this, -1, wxT(""),
+                               wxPoint(-1,-1), wxSize(wwidth, 28));
+ fgs3->Add(PscStatic_SelectionSpecType);
 
  w_hsizer2 = new wxBoxSizer( wxHORIZONTAL );
 
@@ -394,7 +391,7 @@ wxStaticBoxSizer *astro_sizer;
 wxBoxSizer *hsizer2;
 int irows, icols, vgap = 12, hgap = 12, wwidth = 250;
 wxFlexGridSizer *fgs1;
-wxButton *button_find_object, *button_validate, *button_cancel;
+wxButton *button_find_object, *button_validate;
 
 // *************** Astro-object: ***************************************
 
@@ -406,7 +403,7 @@ wxButton *button_find_object, *button_validate, *button_cancel;
  fgs1 = new wxFlexGridSizer(irows, icols, vgap, hgap);
 // i=302 "Name"
  fgs1->Add(new wxStaticText(this, -1, m_messg[302]));
- PscCtrl_StarName = new wxTextCtrl(this, ID_TARGET_STAR_NAME, wxT("ADS 2341"),
+ PscCtrl_StarName = new wxTextCtrl(this, ID_TARGET_STAR_NAME, wxT("SKF1061"),
                                wxPoint(-1,-1), wxSize(wwidth, 28));
  fgs1->Add(PscCtrl_StarName);
 // i=309 "Search in catalog"

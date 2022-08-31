@@ -23,12 +23,11 @@ BEGIN_EVENT_TABLE(Psc1_TargetPanel, wxPanel)
 EVT_BUTTON(ID_TARGET_VALIDATE, Psc1_TargetPanel::OnValidate)
 EVT_BUTTON(ID_TARGET_VALIDATE, Psc1_TargetPanel::OnCancel)
 EVT_BUTTON(ID_TARGET_NEXT, Psc1_TargetPanel::OnNext)
-EVT_BUTTON(ID_TARGET_SELECT, Psc1_TargetPanel::OnSelect)
+EVT_BUTTON(ID_TARGET_SELECT, Psc1_TargetPanel::OnSelectTarget)
 EVT_BUTTON(ID_TARGET_PREV, Psc1_TargetPanel::OnPrevious)
-EVT_BUTTON(ID_TARGET_FIND_OBJECT, Psc1_TargetPanel::OnFindObjectInCatalog1)
+EVT_BUTTON(ID_TARGET_FIND_OBJECT, Psc1_TargetPanel::OnFindObjectInWdsCatalog)
 EVT_BUTTON(ID_TARGET_FIND_ALL, Psc1_TargetPanel::OnFindAllInCatalog1)
-EVT_BUTTON(ID_TARGET_OPENCAT1, Psc1_TargetPanel::OnOpenCatalog1)
-EVT_BUTTON(ID_TARGET_OPEN_ADSWDS, Psc1_TargetPanel::OnOpenADSWDSCrossRefCatalog)
+EVT_BUTTON(ID_TARGET_OPEN_WDS, Psc1_TargetPanel::OnOpenWdsCatalog)
 
 EVT_TEXT(ID_TARGET_STAR_NAME, Psc1_TargetPanel::OnChangeText)
 EVT_TEXT(ID_TARGET_ALPHA, Psc1_TargetPanel::OnChangeText)
@@ -54,30 +53,36 @@ void Psc1_TargetPanel::DisplayNewValues()
 wxString buffer;
 int ih, im;
 double ws;
+char my_Hour[16], my_Dec[16];
+
+strcpy(my_Hour, "H");
+strcpy(my_Dec, "D");
 
 // Target type:
   PscCmb_TargetType.combo->SetSelection(target_type);
 
 // Name:
   if(target_type == 0) {
+// Star name:
     PscCtrl_StarName->SetValue(target_name);
     PscStatic_TargetName->SetLabel(wxT(""));
   } else {
+// Offset, etc :
     PscCtrl_StarName->SetValue(wxT(""));
     PscStatic_TargetName->SetLabel(target_name);
   }
 
 // Right ascension:
-  convert_coord(alpha_value, &ih, &im, &ws, "H");
-  buffer.Printf(wxT("%02d %02d %02d"), ih, im, (int)ws);
+  convert_coord(alpha_value, &ih, &im, &ws, my_Hour);
+  buffer.Printf(wxT("%02d %02d %05.2f"), ih, im, ws);
   PscCtrl_Alpha->SetValue(buffer);
 
 // Declination:
-  convert_coord(delta_value, &ih, &im, &ws, "D");
+  convert_coord(delta_value, &ih, &im, &ws, my_Dec);
     if(ih == 0 && delta_value < 0.)
-     buffer.Printf(wxT("-00 %02d %02d"), im, (int)ws);
+     buffer.Printf(wxT("-00 %02d %05.2f"), im, ws);
    else
-     buffer.Printf(wxT("%02d %02d %02d"), ih, im, (int)ws);
+     buffer.Printf(wxT("%02d %02d %04.1f"), ih, im, ws);
   PscCtrl_Delta->SetValue(buffer);
 
 // Equinox:
@@ -143,6 +148,7 @@ bpr1.rho_min = ((double)i) / 10.;
 i = PscCmb_RhoMax.combo->GetSelection();
 bpr1.rho_max = 1. + (double)i;
 
+return;
 }
 /********************************************************************
 * Update the combo boxes with the values of the selection limits
@@ -215,7 +221,8 @@ wxString buffer;
 
   PscStatic_SelectionStarName->SetLabel(bpa1.Star_name);
   PscStatic_SelectionWDSName->SetLabel(bpa1.WDS_name);
-  PscStatic_SelectionADSName->SetLabel(bpa1.ADS_name);
+  PscStatic_SelectionWDS2Name->SetLabel(bpa1.WDS2_name);
+  PscStatic_SelectionSpecType->SetLabel(bpa1.Spectral_type);
 
 // Measurements:
   buffer.Printf(wxT("%.2f %d"), bpa1.rho, (int)bpa1.theta);
@@ -249,9 +256,12 @@ return;
 ****************************************************************************/
 void Psc1_TargetPanel::OnSelectTargetType(wxCommandEvent& WXUNUSED(event))
 {
+wxString buffer;
+
 if(initialized != 1234) return;
   ChangesDone1 = true;
-  ValidatedChanges1 = false;
+  ValidateChanges();
+
 return;
 }
 /****************************************************************************
@@ -310,12 +320,19 @@ return;
 ****************************************************************************/
 void Psc1_TargetPanel::OnNext(wxCommandEvent& event)
 {
-int status, found = 0;
-char cat_fname[128], save_fname[128], err_message[128];
-char WDS_name0[64], discov_name0[64], ADS_name0[64], ADS_WDS_fname0[64];
-bool search_all_and_save;
+ if(initialized != 1234) return;
 
-if(initialized != 1234) return;
+ FindNextObjectInWdsCatalog();
+}
+/****************************************************************************
+* Search forwards
+*
+****************************************************************************/
+void Psc1_TargetPanel::FindNextObjectInWdsCatalog()
+{
+int found = 0, status;
+char cat_fname[128], save_fname[128], err_message[128];
+bool search_all_and_save;
 
 // First validate limits and update bpr1 :
  ReadSelectionLimits();
@@ -323,36 +340,20 @@ if(initialized != 1234) return;
 // If object was previously selected with this selection,
 // increase alpha_min of selection to go forwards:
  if(ntargets_found > 0) {
- if((bpa1.alpha > bpr1.alpha_min) && (bpa1.alpha < bpr1.alpha_min + bpr1.alpha_range))
-  bpr1.alpha_min = bpa1.alpha;
+   if((bpa1.alpha > bpr1.alpha_min) 
+      && (bpa1.alpha < bpr1.alpha_min + bpr1.alpha_range))
+      bpr1.alpha_min = bpa1.alpha;
  }
 
 // Then performs search:
  search_all_and_save = false;
  strcpy(save_fname, "");
- strcpy(cat_fname, (const char *)catalog1_fname.mb_str());
+ strcpy(cat_fname, (const char *)WdsCatalog_fname.mb_str());
 
- if(catalog_type == 2) {
  status = search_in_WDS_catalog(cat_fname, bpr1, &bpa1, &found,
                                 search_all_and_save, save_fname,
                                 err_message);
-}
-/* TOBEDONE
- else
- status = search_in_PISCO_catalog(cat_fname, bpr1, bpa1, &found,
-                       &line_nber);
-*/
-if(found) {
-  bpa1.ADS_name = wxT("");
-// Look for ADS name
-  if(!ADS_WDS_cross_fname.IsEmpty()) {
-    strcpy(ADS_WDS_fname0, (const char *)ADS_WDS_cross_fname.mb_str());
-    strcpy(WDS_name0, (const char *)bpa1.WDS_name.mb_str());
-    strcpy(discov_name0, (const char *)bpa1.Discover_name.mb_str());
-    status = WDS_to_ADS_name(WDS_name0, discov_name0, ADS_name0,
-                           ADS_WDS_fname0, &found, err_message);
-    if(found) bpa1.ADS_name = wxString(ADS_name0);
-  }
+if(status == 0 && found) {
 // Display the results:
   DisplayFoundSelection();
 
@@ -373,7 +374,7 @@ int status, found = 0;
 char cat_fname[128], save_fname[128], err_message[128];
 bool search_all_and_save;
 
-if((initialized != 1234) || (catalog_type != 2)) return;
+if(initialized != 1234) return;
 
 // Select name for output logbook file:
 wxFileDialog saveFileDialog(this, wxT("Save selection to WDS-formatted file"),
@@ -399,7 +400,7 @@ if (status == wxID_CANCEL) return;
 // Then performs search:
  search_all_and_save = true;
  strcpy(save_fname, (const char *)save_filename.mb_str());
- strcpy(cat_fname, (const char *)catalog1_fname.mb_str());
+ strcpy(cat_fname, (const char *)WdsCatalog_fname.mb_str());
  status = search_in_WDS_catalog(cat_fname, bpr1, &bpa1, &found,
                                 search_all_and_save, save_fname,
                                 err_message);
@@ -420,11 +421,15 @@ if(initialized != 1234) return;
 return;
 }
 /****************************************************************************
-* Select the found object
+* Select the found astronomical object
 ****************************************************************************/
-void Psc1_TargetPanel::OnSelect(wxCommandEvent& event)
+void Psc1_TargetPanel::OnSelectTarget(wxCommandEvent& event)
 {
 if(initialized != 1234) return;
+
+// SelectTargetType to astronomical:
+target_type = 0;
+PscCmb_TargetType.combo->SetSelection(0);
 
 // Copy the parameters of the found object to the interactive panel:
 target_name = bpa1.Discover_name + bpa1.Companion_name;
@@ -434,6 +439,8 @@ equin_value = 2000.;
 
 DisplayNewValues();
 
+ValidateChanges();
+
 return;
 }
 /****************************************************************************
@@ -442,9 +449,12 @@ return;
 void Psc1_TargetPanel::ValidateChanges()
 {
 wxString buffer;
-char cbuffer[128];
-int ih, im, status;
+char cbuffer[128], my_Hour[16], my_Dec[16];
+int ih, im;
 double ws, dvalue;
+
+strcpy(my_Hour, "H");
+strcpy(my_Dec, "D");
 
 // Target type:
 target_type = PscCmb_TargetType.combo->GetSelection();
@@ -478,7 +488,7 @@ if(sscanf(cbuffer,"%d %d %lf", &ih, &im, &ws) == 3) {
  } else {
   wxMessageBox(wxT("Error reading alpha"), wxT("ValidateChanges"),
                wxOK | wxICON_ERROR);
-  convert_coord(alpha_value, &ih, &im, &ws, "H");
+  convert_coord(alpha_value, &ih, &im, &ws, my_Hour);
   buffer.Printf(wxT("%02d h %02d m %02d s"), ih, im, (int)ws);
   PscCtrl_Alpha->SetValue(buffer);
   return;
@@ -498,7 +508,7 @@ if(sscanf(cbuffer,"%d %d %lf", &ih, &im, &ws) == 3) {
  } else {
   wxMessageBox(wxT("Error reading delta"), wxT("ValidateChanges"),
                wxOK | wxICON_ERROR);
-  convert_coord(delta_value, &ih, &im, &ws, "D");
+  convert_coord(delta_value, &ih, &im, &ws, my_Dec);
    if(ih == 0 && delta_value < 0.)
      buffer.Printf(wxT("-00 d %02d m %02d s"), im, (int)ws);
    else
@@ -512,7 +522,6 @@ buffer = PscCtrl_Equinox->GetValue();
   if(buffer.ToDouble(&dvalue)) {
    if(dvalue >= 0. && dvalue <= 3000.) {
     equin_value = dvalue;
-    status = 0;
    } else {
     wxMessageBox(wxT("Error reading equinox"),
                  wxT("ValidateChanges"), wxOK | wxICON_ERROR);
@@ -532,23 +541,20 @@ return;
 /****************************************************************************
 * Look for an object in JLP's double star catalog
 ****************************************************************************/
-void Psc1_TargetPanel::OnFindObjectInCatalog1(wxCommandEvent& event)
+void Psc1_TargetPanel::OnFindObjectInWdsCatalog(wxCommandEvent& event)
 {
 int status;
 wxString error_messg;
 
- if((initialized != 1234) || (catalog_type == 0)) return;
+ if(initialized != 1234) return;
 
 // Load object name from Text Control:
  target_name = PscCtrl_StarName->GetValue();
 
- if(catalog_type == 2)
    status = FindObjectInWdsCatalog(error_messg);
- else
-   status = FindObjectInPiscoCatalog(error_messg);
 
  if(status) {
-  wxMessageBox(error_messg, wxT("OnFindInCatalog1"), wxOK | wxICON_ERROR);
+  wxMessageBox(error_messg, wxT("OnFindInWdsCatalog"), wxOK | wxICON_ERROR);
  } else {
 // Update all fields with the coordinates found in this catalog:
   DisplayNewValues();
@@ -566,13 +572,13 @@ char cat_fname[128], discov_name2[64], comp_name2[64], WDS_name2[64];
 char err_message[128], *pc;
 double alpha2, delta2;
 
-if((initialized != 1234) || (catalog_type != 2)) return(-1);
+if(initialized != 1234) return(-1);
 
 // First get the name :
  target_name = PscCtrl_StarName->GetValue();
 
 // Then performs search:
- strcpy(cat_fname, (const char *)catalog1_fname.mb_str());
+ strcpy(cat_fname, (const char *)WdsCatalog_fname.mb_str());
  strcpy(discov_name2, (const char *)target_name.mb_str());
 
 // Look for companion if present:
@@ -647,7 +653,7 @@ if((initialized != 1234) || (catalog_type != 2)) return(-1);
   delta_value = delta2;
   DisplayNewValues();
  } else {
-   wxMessageBox(wxT("Object not found in catalog"), wxT("OnFindInWDSCatalog"), wxOK);
+   wxMessageBox(wxT("Object not found in catalog"), wxT("OnFindInWdsCatalog"), wxOK);
   alpha_value = 0.;
   delta_value = 0.;
   DisplayNewValues();
@@ -655,9 +661,9 @@ if((initialized != 1234) || (catalog_type != 2)) return(-1);
 
 return(status);
 }
-/**********************************************************************************
+/*******************************************************************************
 *
-**********************************************************************************/
+*******************************************************************************/
 static void AddToFoundTargets(Binary_Parameters bpa1, Binary_Parameters *bpa_found,
                               int *ntargets_found, const int nmax_targets)
 {
@@ -665,24 +671,26 @@ int k;
 
 // When upper limit is reached, shift all the parameters of all the previously found objects
 if(*ntargets_found >= nmax_targets - 1) {
-  for(k = 0; k < nmax_targets - 1; k++)
+  for(k = 0; k < nmax_targets - 1; k++){
    CopyBinaryParameters(&bpa_found[k], bpa_found[k + 1]);
+   }
    *ntargets_found = nmax_targets - 2;
  }
 
  CopyBinaryParameters(&bpa_found[*ntargets_found], bpa1);
  (*ntargets_found)++;
 }
-/**********************************************************************************
+/******************************************************************************
 *
-**********************************************************************************/
+******************************************************************************/
 static void CopyBinaryParameters(Binary_Parameters *bpa0, Binary_Parameters bpa1)
 {
  bpa0->Star_name = bpa1.Star_name;
  bpa0->WDS_name = bpa1.WDS_name;
+ bpa0->WDS2_name = bpa1.WDS2_name;
+ bpa0->Spectral_type = bpa1.Spectral_type;
  bpa0->Discover_name = bpa1.Discover_name;
  bpa0->Companion_name = bpa1.Companion_name;
- bpa0->ADS_name = bpa1.ADS_name;
  bpa0->alpha = bpa1.alpha;
  bpa0->delta = bpa1.delta;
  bpa0->rho = bpa1.rho;
@@ -690,5 +698,4 @@ static void CopyBinaryParameters(Binary_Parameters *bpa0, Binary_Parameters bpa1
  bpa0->mag = bpa1.mag;
  bpa0->dmag = bpa1.dmag;
  bpa0->epoch = bpa1.epoch;
- bpa0->has_orbit = bpa1.has_orbit;
 }

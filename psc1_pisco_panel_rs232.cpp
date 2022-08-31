@@ -3,6 +3,12 @@
  * Author:    JLP
  * Version:   29/10/2015
  **************************************************************/
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>  // sleep routine 
+#endif
+
 #include "psc1_typedef.h"          // MAXI()
 #include "psc1_frame_id.h"
 #include "psc1_pisco_panel.h"
@@ -178,6 +184,7 @@ void Psc1_PiscoPanel::RS232_SendCommand2(char *command1,
 
 wxString buffer;
 int status;
+double delay_seconds;
 /* NOT BETTER
 int ch1_size, i;
 unsigned char ch1[32];
@@ -197,7 +204,9 @@ int rs232_emission_delay_msec;
  if(status || RS232_is_busy) return;
 
 // Wait for some time to prevent overloading the port:
-  Sleep(rs232_emission_delay_msec);
+//  Sleep(rs232_emission_delay_msec);
+  delay_seconds = (double)rs232_emission_delay_msec / 1000.;
+  sleep(delay_seconds);
 
 // Update display:
 // Multiline text: add a EOF line
@@ -221,7 +230,10 @@ int rs232_emission_delay_msec;
    if(ch1[0] == 0) break;
    ch1[1] = 0;
    RS232_SendBuf(comport_nber1, ch1, ch1_size);
-   Sleep(1);
+//   Sleep(1);
+//  Sleep(rs232_emission_delay_msec);
+   delay_seconds = 1. / 1000.;
+   sleep(delay_seconds);
    }
 */
 
@@ -304,6 +316,7 @@ int Psc1_PiscoPanel::RS232GetTheAnswer(int n_wanted, wxString& answer1,
 {
 wxString message1;
 int i, length1, waiting_time_msec, status = -1;
+double delay_seconds;
 
 *n_received = 0;
 answer1 = wxT("");
@@ -314,8 +327,10 @@ waiting_time_msec = 10;
 for(i = 0; i < 4; i++) {
 
 // NB: 700 characters are needed for CheckPositions()
- Sleep(waiting_time_msec);
 // Sleep(waiting_time_msec);
+  delay_seconds = (double)waiting_time_msec / 1000.;
+  sleep(delay_seconds);
+
  RS232ReceiveMessage(message1, &length1);
 // Show the message:
  if(length1 > 0) {

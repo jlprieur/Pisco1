@@ -43,6 +43,10 @@ public:
     return;
     };
 
+// Accessor:
+  int GetUTShift(){
+   return(UT_shift);
+   }
 // Called when changing pages:
   bool ChangesDone(){return(ChangesDone1);}
   bool ValidatedChanges(){return(ValidatedChanges1);}

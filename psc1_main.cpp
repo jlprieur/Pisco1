@@ -50,6 +50,9 @@ PscFrame::PscFrame(const wxChar *title, int GdpWidth, int GdpHeight)
 // French
   iLang = 1;
 
+// Default value: one hour shift (like in France)
+  UT_shift = -1.;
+
 // Prompt the user for a new value of iLang:
   status = SelectLanguageSetup();
 // Exit from here (no window to be closed since nothing opened yet)
@@ -65,12 +68,13 @@ PscFrame::PscFrame(const wxChar *title, int GdpWidth, int GdpHeight)
 
 // Status bar:
 // Create a status bar with two fields at the bottom:
-  m_StatusBar = CreateStatusBar(2);
+  m_StatusBar = CreateStatusBar(3);
 // First field has a variable length, second has a fixed length:
-  int widths[2];
+  int widths[3];
   widths[0] = -1;
   widths[1] = 200;
-  SetStatusWidths( 2, widths );
+  widths[2] = 200;
+  SetStatusWidths( 3, widths );
 
 // Create notebook and its pages
   NotebookSetup(GdpWidth, GdpHeight);
@@ -79,6 +83,9 @@ PscFrame::PscFrame(const wxChar *title, int GdpWidth, int GdpHeight)
   Gdp_SetupMenu();
 
   initialized = 1234;
+
+// Start UT clock timer:
+CDisplayClockOnStatusBar();
 
 return;
 }
@@ -369,6 +376,7 @@ int shift0, ra_offset0, rb_offset0, ra_sign0, rb_sign0, target_type0;
 
 if(initialized != 1234) return;
 
+
 selOld = event.GetOldSelection();
 selNew = event.GetSelection();
 
@@ -377,10 +385,15 @@ selNew = event.GetSelection();
 /* DEBUG
  if(selOld == 0) {
     buffer.Printf(wxT("old sel=%d \n"), selOld);
+// Add "ChangesDone" or "ChangesNotDone" to this buffer:
  if(psc1_param_panel->ChangesDone() == true) buffer.Append(wxT("ChangesDone"));
  else buffer.Append(wxT("ChangesNotDone"));
- if(psc1_param_panel->ValidatedChanges() == true) buffer.Append(wxT("ValidatedChanges"));
- else buffer.Append(wxT("NonValidatedChanges"));
+// Add "ValidatedChanges" or "NonValidatedChanges" to this buffer:
+ if(psc1_param_panel->ValidatedChanges() == true) {
+   buffer.Append(wxT("ValidatedChanges"));
+ } else {
+   buffer.Append(wxT("NonValidatedChanges"));
+ }
    wxMessageBox(buffer, _T("Pisco1"), wxOK);
  }
 */
@@ -398,7 +411,6 @@ selNew = event.GetSelection();
    status = -2;
  }
 
-
 // Prompt the user if changes have not been validated (nor cancelled):
  if(status) {
    buffer.Append(_T("Warning: changes have not been validated, nor cancelled yet!\n"));
@@ -414,9 +426,12 @@ selNew = event.GetSelection();
  }
 
    if(selOld == 0) {
+    if(psc1_param_panel->ValidatedChanges() == true) { 
      psc1_param_panel->GetAtmosphericParam(&temp0, &press0, &hygro0, &shift0,
                                            &ra_offset0, &rb_offset0, &ra_sign0,
                                            &rb_sign0);
+     UT_shift = psc1_param_panel->GetUTShift();
+     }
      psc1_pisco_panel->LoadAtmosphericParam(temp0, press0, hygro0, shift0,
                                             ra_offset0, rb_offset0, ra_sign0,
                                             rb_sign0);
@@ -433,3 +448,24 @@ selNew = event.GetSelection();
 
 return;
 }
+/**********************************************************************
+* Display clock
+* WARNING: if problem
+// so the clock format matches the user locale
+// e.g., 24 vs 12 hour format
+//        m_locale.Init();
+//
+// private:
+//  wxlocale m_locale
+* at the beginning of the program...
+***********************************************************************/
+void PscFrame::CDisplayClockOnStatusBar()
+{
+
+   CDisplay_UpdateClock();
+
+// Start the UT clock timer:
+   m_clockTimer.Bind(wxEVT_TIMER, &PscFrame::CDisplay_OnUpdateClock, this);
+   m_clockTimer.Start(1000);
+}
+

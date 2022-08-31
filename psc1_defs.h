@@ -57,9 +57,10 @@ double mag_max;
 typedef struct {
 wxString Star_name;
 wxString WDS_name;
+wxString WDS2_name;
 wxString Discover_name;
 wxString Companion_name;
-wxString ADS_name;
+wxString Spectral_type;
 double alpha;
 double delta;
 double rho;
@@ -67,7 +68,6 @@ double theta;
 double mag;
 double dmag;
 double epoch;
-bool has_orbit;
 } Binary_Parameters;
 
 #endif

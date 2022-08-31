@@ -45,7 +45,6 @@ extern "C" {
 #include <string.h>
 
 
-
 #if defined(__linux__) || defined(__FreeBSD__)
 
 #include <termios.h>

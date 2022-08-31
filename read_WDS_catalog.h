@@ -17,9 +17,6 @@ int search_in_WDS_catalog(char *WDS_catalog, Binary_Profile bpr1,
                           Binary_Parameters *bpa1, int *found,
                           const bool search_all_and_save,
                           char *save_fname, char *err_message);
-int  WDS_to_ADS_name(char *WDS_name1, char *Discov_name1, char *ADS_name1,
-                     char *ADS_WDS_cross, int *found, char* err_message);
-
 // Oldies:
 int get_data_from_WDS_catalog(char *WDS_catalog, char *discov_name,
                               char *WDS_name, double *WY, double *WR,

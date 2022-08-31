@@ -32,6 +32,8 @@ int jlp_utime(char *UT_Time, double *utime1,
 char buffer[81];
 double local_time, h2;
 int ih0, ih1;
+char my_Hour[16];
+strcpy(my_Hour, "H");
 
 jlp_local_time(buffer);
 #ifdef DEBUG
@@ -47,7 +49,7 @@ printf(" OK: local time is >%s< \n",buffer);
     (*day)--;
   }
 
-  convert_coord(*utime1, &ih0, &ih1, &h2, "H");
+  convert_coord(*utime1, &ih0, &ih1, &h2, my_Hour);
   sprintf(UT_Time,"%02d h %02d m %02d s", ih0, ih1, (int)h2);
 
 return(0);
@@ -67,9 +69,11 @@ return(0);
 int jlp_lsidtime(char *LSTime, double *sidereal_time, double xlong,
                  int UT_shift)
 {
-char buffer[81];
+char buffer[81], my_Hour[16];
 double UT_time, h2, gst0h, year;
 int month, day, ih0, ih1;
+
+strcpy(my_Hour, "H");
 
 /* Universal Time (winter/summer time): */
   jlp_utime(buffer, &UT_time, &year, &month, &day, UT_shift);
@@ -78,7 +82,8 @@ int month, day, ih0, ih1;
 /* xlong is in hours ... */
   *sidereal_time = gst0h + UT_time * 1.002737908 - xlong;
 /* sidereal time is in hours: */
-  convert_coord(*sidereal_time, &ih0, &ih1, &h2, "H");
+//  convert_coord(*sidereal_time, &ih0, &ih1, &h2, "H");
+  convert_coord(*sidereal_time, &ih0, &ih1, &h2, my_Hour);
   sprintf(LSTime, "%02d h %02d m %02d s", ih0, ih1, (int)h2);
 
 return(0);
@@ -238,7 +243,7 @@ int italk, status;
 /* WARNING: beta, zen_dist should be in degrees for GET_CROSSANGLE:
 */
 /* If italk=1 write information to file fp1: */
-   italk = 1;
+   italk = 0;
    status = GET_CROSSANGLE(lambdac,dlambda,&ww_cross,&ww_resid,
                  &ww_beta,temp_value,ff,press_value,zen_dist, ra_offset,
                  rb_offset, ra_sign, rb_sign, code_ra,code_rb,fp1,

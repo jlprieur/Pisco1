@@ -1,0 +1,15 @@
+ Latitude=43.753611 longitude=-0.461537 
+ zd=41.19 deg, lambda_cent=530.00 nm, delta_lambda=57.00 nm
+ Hour_angle=19.791763 zd=41.191854 
+ Beta angle (for atm. disp.) : -78.045 (deg) (North=0, East=90)
+ ************* GET_CROSSANGLE ************ 
+ Central wavelength: 530.000000 Bandwidth: 57.000000 
+ Beta: -78.0 (deg) zd = 41.2 (deg) 
+ Air dispersion to be corrected: 0.3095 (arcsec in focal plane)
+ Optimum cross_angle is 166.15 (deg) 
+DEBUG/ icode1=-14 icode2=458 cross_angle=166.1 
+ ra_offset=987 rb_offset=597 ra_sign=1 rb_sign=1 
+ Code positions: RA=973, RB=31 (1024 steps), cross_angle: 165.94 (deg) 
+> 973 31 
+ Mean deviation at central wavelength = 0.0803 arcsec in focal plane
+ Residual dispersion (between top and bottom) = -0.0047 arcsec in focal plane
