@@ -29,7 +29,7 @@ public:
   bool Close();
   void MyShutdown();
 
-  void DisplayNewValues();
+  void PiscoPanel_DisplayNewValues();
   int PiscoPanel_Setup();
   void PiscoPanel_LeftSetup(wxBoxSizer *pisco_left_sizer);
   void PiscoPanel_CenterSetup(wxBoxSizer *pisco_center_sizer);
@@ -119,7 +119,7 @@ public:
     alpha_value = alpha0;
     delta_value = delta0;
     equin_value = equin0;
-    if(initialized == 1234) DisplayNewValues();
+    if(initialized == 1234) PiscoPanel_DisplayNewValues();
     return;
     };
 

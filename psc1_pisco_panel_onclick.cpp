@@ -7,7 +7,6 @@
 ****************************************************************************/
 #include "psc1_frame_id.h"
 #include "psc1_pisco_panel.h"
-#include "jlp_rs232_thread.h"
 #include "tav_utils.h"     // utime()
 
 BEGIN_EVENT_TABLE(Psc1_PiscoPanel, wxPanel)
@@ -158,7 +157,7 @@ if(!exposure_is_on) {
  }
 
 // Display alpha, delta, ...:
-DisplayNewValues();
+PiscoPanel_DisplayNewValues();
 
 // Toggle button label:
 exposure_is_on = !exposure_is_on;
@@ -207,11 +206,11 @@ if(ivalue >= 0 && ivalue < 1024) {
 
   if(event.GetId() == ID_PISCO_RA_VALID) {
     ra_position = ivalue;
-    buffer.Printf(wxT("RA : %d"), ivalue);
+    buffer.Printf(wxT("RA : %d"), (int)ivalue);
     PscStatic_RA->SetLabel(buffer);
    } else {
     rb_position = ivalue;
-    buffer.Printf(wxT("RB : %d"), ivalue);
+    buffer.Printf(wxT("RB : %d"), (int)ivalue);
     PscStatic_RB->SetLabel(buffer);
    }
 } else {

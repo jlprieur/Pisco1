@@ -48,7 +48,7 @@ END_EVENT_TABLE()
 /********************************************************************
 *
 ********************************************************************/
-void Psc1_TargetPanel::TargetPanel_DisplayNewValues()
+void Psc1_TargetPanel::DisplayNewValues()
 {
 wxString buffer;
 int ih, im;
@@ -229,9 +229,9 @@ wxString buffer;
 
 // Magnitude/Delta mag:
   if(bpa1.dmag < 0)
-    buffer.Printf(wxT("%.1f %.9s"), bpa1.mag, bpa1.Spectral_type);
+    buffer.Printf(wxT("%.1f Sp: %.5s"), bpa1.mag, bpa1.Spectral_type);
   else
-    buffer.Printf(wxT("%.1f (Dm=%.1f) %.9s"), bpa1.mag, bpa1.dmag, 
+    buffer.Printf(wxT("%.1f (Dm=%.1f) Sp: %.5s"), bpa1.mag, bpa1.dmag, 
 		         bpa1.Spectral_type);
   PscStatic_SelectionMagDmag->SetLabel(buffer);
 
@@ -293,6 +293,11 @@ return;
 **************************************************************************/
 void Psc1_TargetPanel::CancelNonValidatedChanges()
 {
+/*
+ SetDefaultValues();
+// Update display
+ DisplayNewValues();
+*/
 
 // Reset following values
 // (needed when this routines is called by OnPageChanging
@@ -358,43 +363,8 @@ if(status == 0 && found) {
 
 return;
 }
-/*****************************************************************
-* Look for WDS data of selected object using alpha and delta only
-******************************************************************/
-void Psc1_TargetPanel::UpdateAutomaticSearch(double alpha2, double delta2)
-{
-int found = 0, status;
-char cat_fname[128], save_fname[128], err_message[128];
-bool search_all_and_save;
-Binary_Profile bpr2;
-
-bpr2.alpha_min = alpha2 - 0.01;
-bpr2.alpha_range = 0.02;
-bpr2.delta_min = delta2 - 0.01;
-bpr2.delta_max = delta2 + 0.01;
-bpr2.rho_min = 0.;
-bpr2.rho_max = 1000.;
-bpr2.mag_min = 0.;
-bpr2.mag_max = 25.;
-
-// Then performs search:
- search_all_and_save = false;
- strcpy(save_fname, "");
- strcpy(cat_fname, (const char *)WdsCatalog_fname.mb_str());
-
-// Look for data and load it to bpa1
- status = search_in_WDS_catalog(cat_fname, bpr2, &bpa1, &found,
-                                search_all_and_save, save_fname,
-                                err_message);
-if(status == 0 && found) {
-// Display the results (bpa1 data)
-  DisplayFoundSelection();
-  }
-
-return;
-}
 /****************************************************************************
-* Search forwards in all WDS catalog
+* Search forwards
 *
 ****************************************************************************/
 void Psc1_TargetPanel::OnFindAllInCatalog1(wxCommandEvent& event)
@@ -467,7 +437,7 @@ alpha_value = bpa1.alpha;
 delta_value = bpa1.delta;
 equin_value = 2000.;
 
-TargetPanel_DisplayNewValues();
+DisplayNewValues();
 
 ValidateChanges();
 
@@ -569,7 +539,7 @@ buffer = PscCtrl_Equinox->GetValue();
 return;
 }
 /****************************************************************************
-* Look for an object in WDS double star catalog and update display
+* Look for an object in JLP's double star catalog
 ****************************************************************************/
 void Psc1_TargetPanel::OnFindObjectInWdsCatalog(wxCommandEvent& event)
 {
@@ -587,13 +557,12 @@ wxString error_messg;
   wxMessageBox(error_messg, wxT("OnFindInWdsCatalog"), wxOK | wxICON_ERROR);
  } else {
 // Update all fields with the coordinates found in this catalog:
-  TargetPanel_DisplayNewValues();
+  DisplayNewValues();
  }
 
 return;
 }
 /*******************************************************************
-* Look for an object in WDS double star catalog
 *
 *********************************************************************/
 int Psc1_TargetPanel::FindObjectInWdsCatalog(wxString& error_messg)
@@ -682,14 +651,12 @@ if(initialized != 1234) return(-1);
  if(found) {
   alpha_value = alpha2;
   delta_value = delta2;
-// JLP2023: update the fields of the selected object too
-  UpdateAutomaticSearch(alpha2, delta2);
-  TargetPanel_DisplayNewValues();
+  DisplayNewValues();
  } else {
    wxMessageBox(wxT("Object not found in catalog"), wxT("OnFindInWdsCatalog"), wxOK);
   alpha_value = 0.;
   delta_value = 0.;
-  TargetPanel_DisplayNewValues();
+  DisplayNewValues();
  }
 
 return(status);

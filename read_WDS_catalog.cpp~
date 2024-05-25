@@ -130,12 +130,13 @@ while(!feof(fp_WDS_cat)) {
    if(comp_name0[0] == '\0') strcpy(comp_name0, "AB");
 
 /* DEBUG
+*/
 { wxString buff;
 buff.Printf(wxT("iline=%d name1=%s (name0=%s) comp1=%s< (%s)"), iline,
             discov_name1, discov_name0, comp_name1, comp_name0);
 wxMessageBox(buff, wxT("ZZZFIND"), wxOK);
+if(iline >= 8)return(-1);
 }
-*/
 
 // Check first if discoverer is the same:
    if(!strcmp(discov_name1, discov_name0)) {

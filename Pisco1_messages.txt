@@ -465,7 +465,7 @@ Abrir/cat&aacute;logo WDS-Pisco
 % i=309
 Find this name
 Chercher ce nom
-Cerca questo nomme
+Cerca questo nome
 Busca este nombre
 % i=310
 Automatic search

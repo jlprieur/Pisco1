@@ -1,8 +1,8 @@
  Latitude=43.753611 longitude=-0.461537 
- zd=38.77 deg, lambda_cent=530.00 nm, delta_lambda=57.00 nm
- Hour_angle=20.445341 zd=38.769770 
- Beta angle (for atm. disp.) : -67.683 (deg) (North=0, East=90)
+ zd=38.32 deg, lambda_cent=530.00 nm, delta_lambda=57.00 nm
+ Hour_angle=3.428642 zd=38.320627 
+ Beta angle (for atm. disp.) : 65.614 (deg) (North=0, East=90)
  ************* GET_CROSSANGLE ************ 
  Central wavelength: 530.000000 Bandwidth: 57.000000 
- Beta: -67.7 (deg) zd = 38.8 (deg) 
-DEBUG/ icode1=-45 icode2=430 cross_angle=167.3 
+ Beta: 65.6 (deg) zd = 38.3 (deg) 
+DEBUG/ icode1=-442 icode2=70 cross_angle=180.0 

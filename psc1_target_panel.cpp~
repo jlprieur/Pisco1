@@ -47,7 +47,7 @@ wxString input_filename;
  InitPrivateParameters();
 
 // Update display (after setting initialized to 1234) :
- TargetPanel_DisplayNewValues();
+ DisplayNewValues();
 
 // Initialize those values (at the end !)
  ChangesDone1 = false;
@@ -304,7 +304,7 @@ int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
 // i=313 "Object found"
  found_sizer = new wxStaticBoxSizer(wxVERTICAL, this, m_messg[313]);
  irows = 4;
- icols = 6;
+ icols = 8;
  vgap = 10, hgap = 8, wwidth = 160;
  fgs3 = new wxFlexGridSizer(irows, icols, vgap, hgap);
 
@@ -350,6 +350,13 @@ int i, irows, icols, vgap = 10, hgap = 12, wwidth = 120;
                                wxPoint(-1,-1), wxSize(wwidth, 28));
  fgs3->Add(PscStatic_SelectionEpoch);
  found_sizer->Add(fgs3, 0, wxALL, 10);
+
+// "SpecType:"
+ fgs3->Add(new wxStaticText(this, -1, wxT("SpecType :")));
+// SpecType:
+ PscStatic_SelectionSpecType = new wxStaticText(this, -1, wxT(""),
+                               wxPoint(-1,-1), wxSize(wwidth, 28));
+ fgs3->Add(PscStatic_SelectionSpecType);
 
  w_hsizer2 = new wxBoxSizer( wxHORIZONTAL );
 

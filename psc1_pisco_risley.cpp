@@ -8,7 +8,6 @@
 #include "psc1_frame_id.h"  // ID_PISCO_RISLEY_TIMER
 #include "psc1_typedef.h"   // ABS
 #include "psc1_pisco_panel.h"
-#include "jlp_rs232_thread.h"
 #include "tav_utils.h"
 
 /****************************************************************

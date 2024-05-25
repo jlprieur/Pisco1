@@ -54,11 +54,10 @@ public:
 // psc1_target_panel_onclick.cpp
   void ValidateChanges();
   void CancelNonValidatedChanges();
-  void UpdateAutomaticSearch(double alpha2, double delta2);
 
 protected:
 // psc1_target_panel_onclick.cpp
-  void TargetPanel_DisplayNewValues();
+  void DisplayNewValues();
   void DisplayNewSelectionLimits();
   void ReadSelectionLimits();
   void DisplayFoundSelection();
@@ -73,7 +72,6 @@ protected:
   void OnSelectTargetType(wxCommandEvent& event);
   void OnSelectLimits(wxCommandEvent& event);
   void OnFindAllInCatalog1(wxCommandEvent& event);
-
 
 private:
 
@@ -93,7 +91,8 @@ private:
   wxStaticText *PscStatic_Date_LastObs, *PscStatic_Rho_LastObs, *PscStatic_Theta_LastObs;
   wxStaticText *PscStatic_TargetName, *PscStatic_WdsCatalog;
   wxStaticText *PscStatic_SelectionWDSName, *PscStatic_SelectionStarName;
-  wxStaticText *PscStatic_SelectionWDS2Name, *PscStatic_SelectionEpoch;
+  wxStaticText *PscStatic_SelectionWDS2Name, *PscStatic_SelectionSpecType;
+  wxStaticText *PscStatic_SelectionEpoch;
   wxStaticText *PscStatic_SelectionRhoTheta, *PscStatic_SelectionMagDmag;
   JLP_ComboBox PscCmb_TargetType;
   JLP_ComboBox PscCmb_Alpha0, PscCmb_AlphaRange, PscCmb_DeltaMin, PscCmb_DeltaMax;

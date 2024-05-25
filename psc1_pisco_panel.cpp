@@ -8,7 +8,6 @@
 #include "psc1_frame_id.h"
 #include "psc1_pisco_panel.h"
 #include "psc1_rs232_mutex.h"
-#include "jlp_rs232_thread.h"  // JLP_Rs232Thread()
 #include "tav_utils.h"         // input_location();
 #include "jlp_rs232_in_c.h"    // RS232 link routines
 
@@ -132,7 +131,7 @@ int status, k, iloc;
  StartRs232Timer();
 
 // Update display (after setting initialized to 1234) :
- DisplayNewValues();
+ PiscoPanel_DisplayNewValues();
 
 // Check positions from RS232 link:
  CheckPositions();
@@ -180,9 +179,9 @@ initialized = 0;
 return;
 }
 /*******************************************************************************
-* Update display
+* Update display of Pisco panel:
 *******************************************************************************/
-void Psc1_PiscoPanel::DisplayNewValues()
+void Psc1_PiscoPanel::PiscoPanel_DisplayNewValues()
 {
 int ih0, ih1;
 double h2;
@@ -668,22 +667,37 @@ return(is_alive);
 int Psc1_PiscoPanel::BootPisco()
 {
 wxString buffer, answer1, error_message1;
-int n_wanted, n_received, status = -1, i;
+int n_wanted, n_received, status = -1, i, iter;
 char *pc, answer[1024], command1[1024];
 
+// JLP2023: try booting 5 times;
+ for(iter = 0; iter < 5; iter++) {
 // To get a prompt "*", we need to send a blank (doesn't need a CReturn)
 // Without \r
-  strcpy(command1, " ");
-  for(i = 0; i < 4; i++) {
-   RS232_SendCommand(command1);
-   }
+    strcpy(command1, " ");
+    for(i = 0; i < 4; i++) {
+      RS232_SendCommand(command1);
+      }
 
 // Initialization of the microprocessor of the speckle camera:
 // WITHOUT \r AT THE END !!!!!
-  strcpy(command1, "G0000");
-  n_wanted = 512;
-  RS232_SendCommand2(command1, n_wanted, answer1, &n_received, error_message1);
+    strcpy(command1, "G0000");
+    n_wanted = 512;
+    RS232_SendCommand2(command1, n_wanted, answer1, &n_received, 
+                       error_message1);
 
+// Check if it is OK, and exit from this loop in that case:
+// Get current status of wheels, lamp and risley prism positions
+    status = CurrentStatusFromRS232();
+    if(status == 0) break;
+  }
+
+// JLP2023: display error message if failure:
+if(status != 0) {
+  wxMessageBox(wxT("Warning: too many iterations needed for booting"), 
+               wxT("BootPisco"), wxOK | wxICON_ERROR);
+  }
+  
 // i=263  "PISCO is starting up ('boot')"
 // i=264 "Enter OK when the Risley prisms have finished rotating
   buffer = m_messg[263] + wxT("\n") + m_messg[264];
@@ -706,7 +720,7 @@ char *pc, answer[1024], command1[1024];
   }
 */
 
-// NEW VERSION: end a G0000 again to solve problems when PISCO is already running:
+// NEW VERSION: send a G0000 again to solve problems when PISCO is already running:
 // NOT WORKING !!!
 //  strcpy(command1, "G0000");
 //  RS232_SendCommand(command1);

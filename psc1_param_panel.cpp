@@ -58,10 +58,10 @@ wxString input_filename;
 
  initialized = 1234;
 
- SetDefaultValues();
+ ParamSetDefaultValues();
 
 // Update display (after setting initialized to 1234) :
- DisplayNewValues();
+ ParamDisplayNewValues();
 
 // Initialize those values (at the end !)
  ChangesDone1 = false;
@@ -72,7 +72,7 @@ return;
 /********************************************************************
 *
 ********************************************************************/
-void Psc1_ParamPanel::SetDefaultValues()
+void Psc1_ParamPanel::ParamSetDefaultValues()
 {
  hygrometry = 50.;
  temperature = 10.;
@@ -105,7 +105,7 @@ and alignment to North with 511,156 (measured with E. Aristidi) */
 /********************************************************************
 *
 ********************************************************************/
-void Psc1_ParamPanel::DisplayNewValues()
+void Psc1_ParamPanel::ParamDisplayNewValues()
 {
 int index;
 wxString buffer;
@@ -338,10 +338,10 @@ return;
 void Psc1_ParamPanel::CancelNonValidatedChanges()
 {
 
-  SetDefaultValues();
+  ParamSetDefaultValues();
 
 // Update display
-  DisplayNewValues();
+  ParamDisplayNewValues();
 
 // Reset following values
 // (needed when this routines is called by OnPageChanging

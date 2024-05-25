@@ -25,8 +25,8 @@ public:
   int ParamPanel_Setup();
   void ParamPanel_LeftSetup(wxBoxSizer *param_left_sizer);
   void ParamPanel_RightSetup(wxBoxSizer *param_right_sizer);
-  void SetDefaultValues();
-  void DisplayNewValues();
+  void ParamSetDefaultValues();
+  void ParamDisplayNewValues();
 
   void GetAtmosphericParam(double *temp0, double *press0,
                            double *hygro0, int *shift0,
